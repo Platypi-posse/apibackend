@@ -1,9 +1,10 @@
 var express = require('express');
-var router = express.Router();
+var controller = express.Router();
+var DBSchema = require('../models/schema');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+controller.get('/', function(req, res, next) {
+  res.send("The Server is working!");
 });
 
-module.exports = router;
+module.exports = controller;

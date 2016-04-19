@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 
 var locationSchema = new mongoose.Schema({
   location_id: Number,
-  coordinates: String,
+  intersection: String,
   art_piece_name: String,
   artist: [],
   description: String,
