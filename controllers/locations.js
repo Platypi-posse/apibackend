@@ -11,7 +11,6 @@ controller.get('/', function(req, res, next) {
 });
 
 controller.post('/post', function(req, res, next) {
-
   var locationInfo = {
     location_id: req.body.location_id,
     intersection: req.body.intersection,
