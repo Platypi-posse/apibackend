@@ -10,6 +10,14 @@ controller.get('/', function(req, res, next) {
 
 });
 
+controller.get('/:id', function(req, res, next) {
+  var id = req.params.id
+  DBSchema.Location.findOne({location_id: id}, function(err, location) {
+    res.json(location);
+  });
+
+});
+
 controller.post('/post', function(req, res, next) {
   var locationInfo = {
     location_id: req.body.location_id,
