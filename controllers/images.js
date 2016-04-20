@@ -17,13 +17,31 @@ controller.post('/post', function(req, res, next) {
     location_id: req.body.location_id,
     date: req.body.date,
     image: req.body.image,
-    isApproved: false
+    isApproved: true
   };
-
-  DBSchema.Image.create(imageInfo, function(error, image) {
-    console.log(image);
-    res.json({ 'message': 'You have succesfully submitted an image!'});
+  var images = new DBSchema.Image(imageInfo)
+  DBSchema.Location.findOne({location_id: images.location_id}, function(err, location) {
+    if (err) console.log(err);
+    location.image.push(images._id);
+    location.save(function (err) {
+      if (err) {
+        return console.log(err);
+      } else {
+        images.save(function (err) {
+          if (err) {
+            return console.log(err);
+          } else {
+            res.json({'message': 'You have successfully submited a image'});
+          }
+        });
+      }
+    });
   });
+
+  // DBSchema.Image.create(imageInfo, function(error, image) {
+  //   console.log(image);
+  //   res.json({ 'message': 'You have succesfully submitted an image!'});
+  // });
 
 });
 

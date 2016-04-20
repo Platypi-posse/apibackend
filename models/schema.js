@@ -7,7 +7,12 @@ var locationSchema = new mongoose.Schema({
   art_piece_name: String,
   artist: [],
   description: String,
-  directions: String
+  directions: String,
+  image: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Image'
+  }],
+  isApproved: Boolean
 });
 
 var Location = mongoose.model('Location', locationSchema);

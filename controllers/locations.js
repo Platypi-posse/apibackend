@@ -10,9 +10,19 @@ controller.get('/', function(req, res, next) {
 
 });
 
+controller.get('/testing/', function(req, res, next) {
+  DBSchema.Location.find({}).populate('image').exec(function(err, location) {
+    if (err) {
+      console.log(err);
+    }
+    res.json(location);
+  });
+});
+
+
 controller.get('/:id', function(req, res, next) {
   var id = req.params.id
-  DBSchema.Location.findOne({location_id: id}, function(err, location) {
+  DBSchema.Location.findOne({location_id: id}).populate('image').exec(function(err, location) {
     res.json(location);
   });
 
@@ -25,15 +35,22 @@ controller.post('/post', function(req, res, next) {
     art_piece_name: req.body.art_piece_name,
     artist: req.body.artist,
     description: req.body.description,
-    directions: req.body.directions
+    directions: req.body.directions,
+    isApproved: true
   };
-
-  DBSchema.Location.create(locationInfo, function(error, location) {
-    console.log(location);
-    res.json({ 'message': 'You have succesfully created a location!'});
+  var locations = new DBSchema.Location(locationInfo)
+  locations.save(function (err) {
+    if (err) {
+      return console.log(err);
+    } else {
+      res.json({'message': 'You have successfully submited a location'});
+    }
   });
+  // DBSchema.Location.create(locationInfo, function(error, location) {
+  //   console.log(location);
+  //   res.json({ 'message': 'You have succesfully created a location!'});
+  // });
 
 });
-
 
 module.exports = controller;
