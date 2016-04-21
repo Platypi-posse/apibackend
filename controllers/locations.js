@@ -10,7 +10,7 @@ controller.get('/', function(req, res, next) {
 
 });
 
-controller.get('/testing/', function(req, res, next) {
+controller.get('/images/', function(req, res, next) {
   DBSchema.Location.find({}).populate('image').exec(function(err, location) {
     if (err) {
       console.log(err);
