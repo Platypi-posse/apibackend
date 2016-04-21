@@ -43,7 +43,7 @@ controller.post('/post', function(req, res, next) {
     if (err) {
       return console.log(err);
     } else {
-      res.json({'message': 'You have successfully submited a location'});
+      res.json({'message': 'You have successfully submitted a location'});
     }
   });
   // DBSchema.Location.create(locationInfo, function(error, location) {

@@ -31,7 +31,7 @@ controller.post('/post', function(req, res, next) {
           if (err) {
             return console.log(err);
           } else {
-            res.json({'message': 'You have successfully submited a image'});
+            res.json({'message': 'You have successfully submitted an image'});
           }
         });
       }
